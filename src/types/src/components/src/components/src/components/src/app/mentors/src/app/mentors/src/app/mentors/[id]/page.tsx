@@ -125,3 +125,91 @@ export default function MentorDetailPage() {
                   <h2 className="text-xl font-semibold mb-3">Training Focus</h2>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     {getTrainingFocus(mentor.position).map((focus, index) => (
+                      <div key={index} className="bg-blue-50 p-3 rounded-lg text-center">
+                        <span className="text-sm font-medium text-blue-800">{focus}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Booking Sidebar */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-lg shadow-lg p-6 sticky top-4">
+              <h3 className="text-xl font-semibold mb-4">Book a Session</h3>
+              
+              <div className="space-y-4 mb-6">
+                <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                  <span className="text-gray-700">Session Length</span>
+                  <span className="font-medium">{mentor.sessionLength} minutes</span>
+                </div>
+                <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                  <span className="text-gray-700">Price</span>
+                  <span className="font-medium">${mentor.price}</span>
+                </div>
+                <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                  <span className="text-gray-700">Location</span>
+                  <span className="font-medium">{mentor.location.city}, {mentor.location.state}</span>
+                </div>
+              </div>
+
+              <button 
+                onClick={() => setShowContactForm(true)}
+                className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition mb-4"
+              >
+                Contact {mentor.name.split(' ')[0]}
+              </button>
+
+              <div className="text-center">
+                <p className="text-sm text-gray-600 mb-2">Questions?</p>
+                <div className="flex justify-center space-x-4">
+                  <button className="flex items-center text-blue-600 hover:text-blue-800">
+                    <Mail className="h-4 w-4 mr-1" />
+                    <span className="text-sm">Email</span>
+                  </button>
+                  <button className="flex items-center text-blue-600 hover:text-blue-800">
+                    <Phone className="h-4 w-4 mr-1" />
+                    <span className="text-sm">Call</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Stats */}
+            <div className="bg-white rounded-lg shadow-lg p-6 mt-6">
+              <h3 className="text-lg font-semibold mb-4">Quick Stats</h3>
+              <div className="space-y-3">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">University</span>
+                  <span className="font-medium">{mentor.university}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Conference</span>
+                  <span className="font-medium">{mentor.conference}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Year</span>
+                  <span className="font-medium">{mentor.year}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Response Time</span>
+                  <span className="font-medium text-green-600">Within 24 hours</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Contact Form Modal */}
+      {showContactForm && (
+        <ContactForm 
+          mentor={mentor}
+          onClose={() => setShowContactForm(false)}
+        />
+      )}
+    </div>
+  );
+}
